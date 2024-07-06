@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from '../api';
+import SidePanel from './SidePanel';
 
 function ReservationList() {
   const [reservations, setReservations] = useState([]);
@@ -57,6 +58,7 @@ function ReservationList() {
               <td>{reservation.spaceId || 'N/A'}</td>
               <td>{formatDate(reservation.startDate) || 'N/A'}</td>
               <td>{formatDate(reservation.endDate) || 'N/A'}</td>
+              <SidePanel/>
             </tr>
           ))}
         </tbody>

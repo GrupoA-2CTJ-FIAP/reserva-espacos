@@ -8,11 +8,11 @@
   --light-color: #f8f9fa;
   --dark-color: #343a40;
 }
-
-body {
-  max-width: 100vw; /* Set maximum width to 100% of viewport width */
-  margin: 0 auto;   /* Center align content */
-  overflow-x: hidden; /* Optional: Hide horizontal scrollbar if content overflows */
+body, html {
+  max-width: 100vw;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }
 
 .navbar {
@@ -178,4 +178,34 @@ table {
 
 .reservation-details {
   /* Styles for the reservation details section */
+}
+
+/* Footer.css */
+footer {
+  background-color: #343a40;
+  color: #ffffff;
+  width: 100%;
+  overflow: hidden; /* Ensure no overflow */
+}
+
+footer h5 {
+  margin-bottom: 1rem;
+}
+
+footer p, footer a {
+  margin-bottom: 0.5rem;
+}
+
+footer a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+.container-fluid {
+  padding-right: 0;
+  padding-left: 0;
 }
