@@ -14,28 +14,63 @@ body, html {
   padding: 0;
   overflow-x: hidden;
 }
-
+/* Navbar.css */
 .navbar {
-  background-color: #333;
+  background-color: var(--primary-color);
   padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.navbar-logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--text-color);
 }
 
 .navbar-list {
   list-style-type: none;
   display: flex;
-  justify-content: space-around;
+  gap: 1rem;
   margin: 0;
   padding: 0;
 }
 
 .navbar-item a {
-  color: white;
+  color: var(--text-color);
   text-decoration: none;
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 .navbar-item a:hover {
   text-decoration: underline;
+}
+
+.theme-toggle {
+  background: none;
+  border: 1px solid var(--text-color);
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  color: var(--text-color);
+  border-radius: 5px;
+}
+
+@media (max-width: 768px) {
+  .navbar-list {
+    display: none; /* Hide the list on smaller screens */
+  }
+
+  .navbar-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 
 .btn-primary {
@@ -84,7 +119,7 @@ table {
 }
 
 .form-group {
-  width: 400px;
+  width: 300px;
   margin-right: auto;
   margin-left: auto;
   padding: 20px;
@@ -98,6 +133,10 @@ table {
 
 .form-control {
   border-color: var(--primary-color);
+}
+
+.edit-input {
+  width: 100px;
 }
 
 .datetime-container {
@@ -172,13 +211,6 @@ table {
   /* Styles for the reservation list container */
 }
 
-.calendar {
-  /* Styles for the calendar component */
-}
-
-.reservation-details {
-  /* Styles for the reservation details section */
-}
 
 /* Footer.css */
 footer {

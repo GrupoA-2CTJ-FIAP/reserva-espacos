@@ -9,6 +9,7 @@ const App = () => {
   return (
     <div className="App">
       <h1>Sistema de Reserva de Espaços</h1>
+      <h2>Fazer Reserva</h2>
       <ReservationForm /> 
       <ReservationCalendar />
       <ReservationList />

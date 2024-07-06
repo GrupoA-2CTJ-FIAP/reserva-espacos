@@ -24,7 +24,9 @@ function ReservationForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('/reservations', { space_id: spaceId, start_time: startDate + 'T' + startTime, end_time: endTime });
+      const startDateTime = new Date(startDate + 'T' + startTime).toISOString();
+      const endDateTime = new Date(new Date(startDateTime).getTime() + endTime * 60 * 60 * 1000).toISOString();
+      await axios.post('/reservations', {"spaceId":spaceId, "clientId": 1, "startDate": startDateTime, "endDate": endDateTime });
       alert('Reserva criada com sucesso!');
     } catch (error) {
       console.error('Erro ao criar reserva', error);
@@ -42,7 +44,6 @@ function ReservationForm() {
 
   return (
     <section className="form-container">
-      <h2>Fazer Reserva</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Espaço:</label>

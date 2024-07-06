@@ -1,34 +1,27 @@
+// Navbar.js
 import React from 'react';
-import { Link } from 'react-router-dom'; // If using React Router for navigation
+import { useTheme } from './ThemeContext';
+import './Navbar.css';
 
 const Navbar = () => {
+  const { theme, toggleTheme } = useTheme();
+
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div className="container">
-        <Link className="navbar-brand" to="/">Your Logo</Link> {/* Adjust as needed */}
-        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"></span>
+    <nav className="navbar">
+      <div className="navbar-container">
+        <div className="navbar-logo">MyApp</div>
+        <ul className="navbar-list">
+          <li className="navbar-item"><a href="#home">Home</a></li>
+          <li className="navbar-item"><a href="#about">About</a></li>
+          <li className="navbar-item"><a href="#services">Services</a></li>
+          <li className="navbar-item"><a href="#contact">Contact</a></li>
+        </ul>
+        <button className="theme-toggle" onClick={toggleTheme}>
+          {theme === 'light' ? 'Dark' : 'Light'} Theme
         </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav ml-auto">
-            <li className="nav-item">
-              <Link className="nav-link" to="/">Home</Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/about">About</Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/services">Services</Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/contact">Contact</Link>
-            </li>
-            {/* Add more navigation links as needed */}
-          </ul>
-        </div>
       </div>
     </nav>
   );
-}
+};
 
 export default Navbar;
