@@ -311,6 +311,7 @@ table {
 .react-calendar__century-view__decades__decade--neighboringCentury:disabled {
   color: #000000;
 }
+
 .react-calendar__tile.react-calendar__month-view__days__day--neighboringMonth {
   /* Styles for days from neighboring months */
   opacity: 0.5; /* Reduce opacity for neighboring month days */

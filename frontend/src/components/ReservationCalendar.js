@@ -69,6 +69,7 @@ function ReservationCalendar() {
         <div className="calendar-container">
           <Calendar
             className="calendar"
+            locale="pt-BR"
             value={selectedDate}
             onClickDay={handleDayClick} // Handle day click event
             tileContent={({ date }) => {
