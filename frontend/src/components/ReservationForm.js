@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from '../api';
 
-function ReservationForm() {
+function ReservationForm({ requestType = "POST" }) {
   const [spaces, setSpaces] = useState([]);
   const [spaceId, setSpaceId] = useState('');
   const [startDate, setStartDate] = useState('');
@@ -24,10 +24,15 @@ function ReservationForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const startDateTime = new Date(startDate + 'T' + startTime).toISOString();
-      const endDateTime = new Date(new Date(startDateTime).getTime() + endTime * 60 * 60 * 1000).toISOString();
-      await axios.post('/reservations', {"spaceId":spaceId, "clientId": 1, "startDate": startDateTime, "endDate": endDateTime });
-      alert('Reserva criada com sucesso!');
+      if (requestType === 'POST') {
+        const startDateTime = new Date(startDate + 'T' + startTime).toISOString();
+        const endDateTime = new Date(new Date(startDateTime).getTime() + endTime * 60 * 60 * 1000).toISOString();
+        await axios.post('/reservations', { "spaceId": spaceId, "clientId": 1, "startDate": startDateTime, "endDate": endDateTime });
+        alert('Reserva criada com sucesso!');
+        window.location.reload();
+      } else if (requestType === 'PUT') {
+
+      }
     } catch (error) {
       console.error('Erro ao criar reserva', error);
       alert('Erro ao criar reserva');
@@ -52,6 +57,7 @@ function ReservationForm() {
               className="form-control form-control-sm"
               value={spaceId}
               onChange={(e) => setSpaceId(e.target.value)}
+              required
             >
               <option value="">Selecione um espaço</option>
               {spaces.length > 0 ? (
@@ -71,8 +77,10 @@ function ReservationForm() {
               value={startDate}
               onChange={(e) => setStartDate(e.target.value)}
               min={getTodayDate()} // Set min attribute to today's date
+              required
             />
-            <select defaultValue="00:00" onChange={(e) => setStartTime(e.target.value)}>
+            <select defaultValue="00:00" onChange={(e) => setStartTime(e.target.value)}
+              required>
               <option value="00:00">00:00</option>
               <option value="01:00">01:00</option>
               <option value="02:00">02:00</option>

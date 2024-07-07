@@ -21,7 +21,7 @@ function SidePanel() {
           <Offcanvas.Title>Editar Reserva</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          <ReservationForm/>
+          <ReservationForm requestType="PUT"/>
         </Offcanvas.Body>
       </Offcanvas>
     </>

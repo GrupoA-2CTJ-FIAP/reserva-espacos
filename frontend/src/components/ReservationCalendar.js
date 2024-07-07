@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from '../api';
 import Calendar from 'react-calendar'; // Import react-calendar
-import 'react-calendar/dist/Calendar.css'; // Import calendar styles
 
 function ReservationCalendar() {
   const [reservations, setReservations] = useState([]);
@@ -41,17 +40,6 @@ function ReservationCalendar() {
     return `${hours}:${minutes}`;
   }
 
-  /*
-  useEffect(() => {
-    if (selectedDate) {
-      const formattedSelectedDate = selectedDate.toISOString().split('T')[0]; // Format selected date as ISO string
-      const filtered = reservations.filter(reservation => {
-        return reservation.startDate.startsWith(formattedSelectedDate); // Filter reservations for selected date
-      });
-      setFilteredReservations(filtered);
-    }
-  }, [selectedDate, reservations]);
-*/
   useEffect(() => {
     if (selectedDate) {
       const formattedSelectedDate = formatDate(selectedDate); // Format selected date as ISO string
@@ -93,7 +81,7 @@ function ReservationCalendar() {
               });
 
               if (matchingReservations.length > 0) {
-                return <p>{matchingReservations.length} reserva(s)</p>;
+                return <p className="reservation-markup">{matchingReservations.length}</p>;
               }
 
               return null;
