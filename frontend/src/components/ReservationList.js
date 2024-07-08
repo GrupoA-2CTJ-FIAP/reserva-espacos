@@ -58,7 +58,7 @@ function ReservationList() {
               <td>{reservation.spaceId || 'N/A'}</td>
               <td>{formatDate(reservation.startDate) || 'N/A'}</td>
               <td>{formatDate(reservation.endDate) || 'N/A'}</td>
-              <SidePanel/>
+              <SidePanel spaceId={reservation.id}/>
             </tr>
           ))}
         </tbody>

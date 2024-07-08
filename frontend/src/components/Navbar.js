@@ -1,27 +1,16 @@
-// Navbar.js
-import React from 'react';
-import { useTheme } from './ThemeContext';
-import './Navbar.css';
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 
-const Navbar = () => {
-  const { theme, toggleTheme } = useTheme();
-
+function BasicExample() {
   return (
-    <nav className="navbar">
-      <div className="navbar-container">
-        <div className="navbar-logo">MyApp</div>
-        <ul className="navbar-list">
-          <li className="navbar-item"><a href="#home">Home</a></li>
-          <li className="navbar-item"><a href="#about">About</a></li>
-          <li className="navbar-item"><a href="#services">Services</a></li>
-          <li className="navbar-item"><a href="#contact">Contact</a></li>
-        </ul>
-        <button className="theme-toggle" onClick={toggleTheme}>
-          {theme === 'light' ? 'Dark' : 'Light'} Theme
-        </button>
-      </div>
-    </nav>
+    <Navbar expand="lg" className="bg-body-tertiary " bg="dark" data-bs-theme="dark">
+      <Container>
+        <Navbar.Brand href="#home" className='navbar-title'>Sistema de Reserva de Espaços</Navbar.Brand>
+      </Container>
+    </Navbar>
   );
-};
+}
 
-export default Navbar;
+export default BasicExample;

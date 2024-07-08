@@ -4,7 +4,7 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import ReservationForm from './ReservationForm';
 
 
-function SidePanel() {
+function SidePanel({spaceId}) {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -18,7 +18,7 @@ function SidePanel() {
 
       <Offcanvas show={show} onHide={handleClose}>
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Editar Reserva</Offcanvas.Title>
+          <Offcanvas.Title>Editar Reserva - nº{spaceId}</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
           <ReservationForm requestType="PUT"/>

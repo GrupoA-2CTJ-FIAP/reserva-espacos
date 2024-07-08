@@ -1,4 +1,5 @@
 import React from 'react';
+import Navbar from './components/Navbar'
 import ReservationForm from './components/ReservationForm';
 import ReservationList from './components/ReservationList';
 import ReservationCalendar from './components/ReservationCalendar';
@@ -8,7 +9,7 @@ import './App.css';
 const App = () => {
   return (
     <div className="App">
-      <h1>Sistema de Reserva de Espaços</h1>
+      <Navbar/>
       <h2>Fazer Reserva</h2>
       <ReservationForm /> 
       <ReservationCalendar />
