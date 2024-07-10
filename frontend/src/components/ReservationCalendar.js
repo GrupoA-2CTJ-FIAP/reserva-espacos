@@ -13,7 +13,6 @@ function ReservationCalendar() {
     async function fetchReservations() {
       try {
         const response = await axios.get('/reservations');
-        console.log('Fetched reservations:', response.data); // Debug
         setReservations(response.data);
         setLoading(false);
       } catch (error) {

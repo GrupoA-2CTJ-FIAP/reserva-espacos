@@ -15,8 +15,11 @@ function EditReservationForm({ reservationSpaceId }) {
         const response = await axios.get('/spaces');
         setSpaces(response.data);
         const response2 = await axios.get('/reservations/' + reservationSpaceId);
-        console.log('Fetched reservation:', response2.data);
         setReservation(response2.data);
+        setSpaceId(response2.data.spaceId);
+        setStartDate(formatDate(response2.data.startDate));
+        setStartTime(formatTime(response2.data.startDate));
+        console.log(startTime);
       } catch (error) {
         console.error('Error fetching spaces:', error);
       }
@@ -57,7 +60,7 @@ function EditReservationForm({ reservationSpaceId }) {
     return `${year}-${month}-${day}`;
   };
 
-  const formatTime = (isoDateTimeString) => { 
+  const formatTime = (isoDateTimeString) => {
     const date = new Date(isoDateTimeString);
     const hours = date.getHours().toString().padStart(2, '0');
     const minutes = date.getMinutes().toString().padStart(2, '0');
@@ -88,7 +91,7 @@ function EditReservationForm({ reservationSpaceId }) {
           <div className='space-container'>
             <select
               className="form-control form-control-sm"
-              value={reservation.spaceId}
+              value={spaceId}
               onChange={(e) => setSpaceId(e.target.value)}
               required
             >
@@ -107,13 +110,13 @@ function EditReservationForm({ reservationSpaceId }) {
             <input
               type="date"
               className="form-control form-control-sm"
-              value={formatDate(reservation.startDate)}
+              value={startDate}
               onChange={(e) => setStartDate(e.target.value)}
               min={getTodayDate()} // Set min attribute to today's date
               required
             />
           </div>
-          <select defaultValue={formatTime} onChange={(e) => setStartTime(e.target.value)}
+          <select value={startTime} onChange={(e) => setStartTime(e.target.value)}
             required>
             <option value="00:00">00:00</option>
             <option value="01:00">01:00</option>

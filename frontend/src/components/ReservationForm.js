@@ -12,7 +12,6 @@ function ReservationForm() {
     async function fetchSpaces() {
       try {
         const response = await axios.get('/spaces');
-        console.log('Fetched spaces:', response.data); // Debugging log
         setSpaces(response.data);
       } catch (error) {
         console.error('Error fetching spaces:', error);
