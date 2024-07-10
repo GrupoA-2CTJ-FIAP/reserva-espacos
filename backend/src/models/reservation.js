@@ -21,4 +21,6 @@ const Reservation = sequelize.define('Reservation', {
   totalHours: { type: DataTypes.INTEGER, allowNull: false }
 })
 
+Reservation.belongsTo(Space, { foreignKey: 'spaceId' })
+
 module.exports = Reservation

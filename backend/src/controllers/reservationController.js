@@ -1,4 +1,5 @@
 const Reservation = require('../models/reservation')
+const Space = require('../models/space')
 const { Op } = require('sequelize')
 
 exports.createReservation = async (req, res) => {
@@ -40,8 +41,55 @@ exports.createReservation = async (req, res) => {
 
 exports.getReservations = async (req, res) => {
   try {
-    const reservations = await Reservation.findAll()
-    res.status(200).json(reservations)
+    const reservations = await Reservation.findAll({
+      where: { status: true },
+      include: [{ model: Space, attributes: ['name'] }]
+    })
+
+    const result = reservations.map(reservation => {
+      return {
+        id: reservation.id,
+        spaceId: reservation.spaceId,
+        clientId: reservation.clientId,
+        startDate: reservation.startDate,
+        endDate: reservation.endDate,
+        status: reservation.status,
+        totalHours: reservation.totalHours,
+        spaceName: reservation.Space.name
+      }
+    })
+
+    res.status(200).json(result)
+  } catch (error) {
+    res.status(400).json({ error: error.message })
+  }
+}
+
+exports.getReservationById = async (req, res) => {
+  try {
+    const { id } = req.params
+
+    const reservation = await Reservation.findOne({
+      where: { id, status: true },
+      include: [{ model: Space, attributes: ['name'] }]
+    })
+
+    if (!reservation) {
+      return res.status(404).json({ error: 'Reservation not found' })
+    }
+
+    const result = {
+      id: reservation.id,
+      spaceId: reservation.spaceId,
+      clientId: reservation.clientId,
+      startDate: reservation.startDate,
+      endDate: reservation.endDate,
+      status: reservation.status,
+      totalHours: reservation.totalHours,
+      spaceName: reservation.Space.name
+    }
+
+    res.status(200).json(result)
   } catch (error) {
     res.status(400).json({ error: error.message })
   }
