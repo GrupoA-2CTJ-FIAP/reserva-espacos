@@ -12,7 +12,7 @@ function SidePanel({spaceId}) {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button variant="outline-primary" onClick={handleShow}>
         Editar
       </Button>
 

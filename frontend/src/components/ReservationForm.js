@@ -5,7 +5,7 @@ function ReservationForm() {
   const [spaces, setSpaces] = useState([]);
   const [spaceId, setSpaceId] = useState('');
   const [startDate, setStartDate] = useState('');
-  const [startTime, setStartTime] = useState('');
+  const [startTime, setStartTime] = useState('00:00');
   const [endTime, setEndTime] = useState('1');
 
   useEffect(() => {
