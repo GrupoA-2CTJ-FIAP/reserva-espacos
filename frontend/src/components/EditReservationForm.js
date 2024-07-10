@@ -66,7 +66,9 @@ function EditReservationForm({ reservationSpaceId }) {
     const minutes = date.getMinutes().toString().padStart(2, '0');
     console.log(`${hours}:${minutes}`);
     return `${hours}:${minutes}`;
-  }
+  };
+
+  const formatDuration = () => {}
 
   const cancelReservation = async (e) => {
     e.preventDefault();
