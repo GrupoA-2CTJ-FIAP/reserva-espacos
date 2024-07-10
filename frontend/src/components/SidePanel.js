@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Offcanvas from 'react-bootstrap/Offcanvas';
-import ReservationForm from './ReservationForm';
+import EditReservationForm from './EditReservationForm';
 
 
 function SidePanel({spaceId}) {
@@ -21,7 +21,7 @@ function SidePanel({spaceId}) {
           <Offcanvas.Title>Editar Reserva - nº{spaceId}</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          <ReservationForm requestType="PUT"/>
+          <EditReservationForm  reservationSpaceId={spaceId}/>
         </Offcanvas.Body>
       </Offcanvas>
     </>

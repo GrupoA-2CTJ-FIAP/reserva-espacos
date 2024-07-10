@@ -55,7 +55,7 @@ function ReservationList() {
         <tbody>
           {reservations.map((reservation) => (
             <tr key={reservation.id}>
-              <td>{reservation.spaceId || 'N/A'}</td>
+              <td>{reservation.spaceName || 'N/A'}</td>
               <td>{formatDate(reservation.startDate) || 'N/A'}</td>
               <td>{formatDate(reservation.endDate) || 'N/A'}</td>
               <SidePanel spaceId={reservation.id}/>

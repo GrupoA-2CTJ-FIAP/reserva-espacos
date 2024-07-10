@@ -33,6 +33,7 @@ html {
 }
 
 .btn-danger {
+  margin-left: 20px;
   background-color: var(--danger-color);
   border-color: var(--danger-color);
 }
@@ -131,7 +132,21 @@ table {
   /* Gap between grid items */
 }
 
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  /* Two equal columns */
+  gap: 20px;
+  /* Gap between grid items */
+}
 
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+    /* Stack items vertically */
+  }
+}
 
 /* Calendar Custom*/
 .calendar-container {

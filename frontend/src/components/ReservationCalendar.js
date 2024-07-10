@@ -115,7 +115,7 @@ function ReservationCalendar() {
                 <tbody>
                   {filteredReservations.map(reservation => (
                     <tr key={reservation.id}>
-                      <td>{reservation.spaceId || 'N/A'}</td>
+                      <td>{reservation.spaceName || 'N/A'}</td>
                       <td>{formatHour(reservation.startDate) || 'N/A'}</td>
                       <td>{formatHour(reservation.endDate) || 'N/A'}</td>
                     </tr>

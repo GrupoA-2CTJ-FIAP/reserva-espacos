@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from '../api';
 
-function ReservationForm() {
+function EditReservationForm({ reservationSpaceId }) {
   const [spaces, setSpaces] = useState([]);
+  const [reservations, setReservations] = useState([]);
   const [spaceId, setSpaceId] = useState('');
   const [startDate, setStartDate] = useState('');
   const [startTime, setStartTime] = useState('');
@@ -12,8 +13,10 @@ function ReservationForm() {
     async function fetchSpaces() {
       try {
         const response = await axios.get('/spaces');
-        console.log('Fetched spaces:', response.data); // Debugging log
         setSpaces(response.data);
+        const response2 = await axios.get('/reservations/');
+        console.log('Fetched reservations:', response2.data);
+        setReservations(response2.data);
       } catch (error) {
         console.error('Error fetching spaces:', error);
       }
@@ -23,16 +26,19 @@ function ReservationForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const startDateTime = new Date(startDate + 'T' + startTime).toISOString();
-      const endDateTime = new Date(new Date(startDateTime).getTime() + endTime * 60 * 60 * 1000).toISOString();
-      await axios.post('/reservations', { "spaceId": spaceId, "clientId": 1, "startDate": startDateTime, "endDate": endDateTime });
-      alert('Reserva criada com sucesso!');
-      window.location.reload();
-    } catch (error) {
-      console.error('Erro ao criar reserva', error);
-      alert('Erro ao criar reserva');
-    }
+    const answer = window.confirm("Tem certeza que deseja alterar a reserva?");
+    if (answer) {
+      try {
+        const startDateTime = new Date(startDate + 'T' + startTime).toISOString();
+        const endDateTime = new Date(new Date(startDateTime).getTime() + endTime * 60 * 60 * 1000).toISOString();
+        await axios.put('/reservations', { "spaceId": spaceId, "clientId": 1, "startDate": startDateTime, "endDate": endDateTime });
+        alert('Reserva criada com sucesso!');
+        window.location.reload();
+      } catch (error) {
+        console.error('Erro ao editar reserva', error);
+        alert('Erro ao editar reserva');
+      }
+    }else{console.log("Changes NOT sent to the database.")}
   };
 
   const getTodayDate = () => {
@@ -43,6 +49,21 @@ function ReservationForm() {
     return `${year}-${month}-${day}`;
   };
 
+const cancelReservation = async(e) =>{
+  e.preventDefault();
+  const answer = window.confirm("Tem certeza que deseja cancelar a reserva?");
+    if (answer) {
+      try {
+        await axios.put('/reservations/'+reservationSpaceId+'/cancel');
+        alert('Reserva cancelada!');
+        window.location.reload();
+      } catch (error) {
+        console.error('Erro ao cancelar reserva', error);
+        alert('Erro ao editar reserva');
+      }
+    }else{console.log("Changes NOT sent to the database.")}
+}
+
   return (
     <section className="form-container">
       <form onSubmit={handleSubmit}>
@@ -51,7 +72,7 @@ function ReservationForm() {
           <div className='space-container'>
             <select
               className="form-control form-control-sm"
-              value={spaceId}
+              value={reservations.spaceId}
               onChange={(e) => setSpaceId(e.target.value)}
               required
             >
@@ -70,12 +91,13 @@ function ReservationForm() {
             <input
               type="date"
               className="form-control form-control-sm"
-              value={startDate}
+              value={reservations.startDate}
               onChange={(e) => setStartDate(e.target.value)}
               min={getTodayDate()} // Set min attribute to today's date
               required
             />
-            <select defaultValue="00:00" onChange={(e) => setStartTime(e.target.value)}
+          </div>
+          <select defaultValue="00:00" onChange={(e) => setStartTime(e.target.value)}
               required>
               <option value="00:00">00:00</option>
               <option value="01:00">01:00</option>
@@ -102,7 +124,6 @@ function ReservationForm() {
               <option value="22:00">22:00</option>
               <option value="23:00">23:00</option>
             </select>
-          </div>
           <div className='slider-container'>
             <label htmlFor="slider">Quantidade de horas: </label>
             <input
@@ -115,11 +136,12 @@ function ReservationForm() {
             />
             <span id='slider-value'>{endTime} hora(s).</span>
           </div>
-          <button type="submit" className="btn btn-primary btn-sm mt-3">Fazer Reserva</button>
+          <button type="submit" className="btn btn-primary btn-sm mt-3">Alterar Reserva</button>
+          <button className="btn btn-danger btn-sm mt-3" onClick={cancelReservation}>Cancelar Reserva</button>
         </div>
       </form>
     </section>
   );
 }
 
-export default ReservationForm;
+export default EditReservationForm;
