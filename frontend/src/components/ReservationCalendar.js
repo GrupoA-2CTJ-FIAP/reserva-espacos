@@ -63,7 +63,7 @@ function ReservationCalendar() {
 
   return (
     <div className="container">
-      <h2>Calendário</h2>
+      <h2 className='title'>Calendário</h2>
       <div className="grid-container">
         <div className="calendar-container">
           <Calendar

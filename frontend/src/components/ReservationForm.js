@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from '../api';
+import Modal from '../components/Modal'
 
 function ReservationForm() {
   const [spaces, setSpaces] = useState([]);
@@ -63,6 +64,7 @@ function ReservationForm() {
                 <option disabled>Loading spaces...</option>
               )}
             </select>
+            <Modal/>
           </div>
           <label>Data e Hora de Início:</label>
           <div className='datetime-container'>
@@ -74,7 +76,7 @@ function ReservationForm() {
               min={getTodayDate()} // Set min attribute to today's date
               required
             />
-            <select defaultValue="00:00" onChange={(e) => setStartTime(e.target.value)}
+            <select className='time-selector' defaultValue="00:00" onChange={(e) => setStartTime(e.target.value)}
               required>
               <option value="00:00">00:00</option>
               <option value="01:00">01:00</option>

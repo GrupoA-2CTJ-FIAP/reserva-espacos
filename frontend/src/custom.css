@@ -9,6 +9,13 @@
   --dark-color: #343a40;
 }
 
+a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: larger;
+}
+
 body,
 html {
   max-width: 100vw;
@@ -18,6 +25,7 @@ html {
 }
 
 .navbar-title {
+  min-height: 100px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -27,20 +35,9 @@ html {
   border-color: var(--primary-color);
 }
 
-.btn-primary:hover {
-  background-color: darken(var(--primary-color), 10%);
-  border-color: darken(var(--primary-color), 10%);
-}
-
 .btn-danger {
-  margin-left: 20px;
   background-color: var(--danger-color);
   border-color: var(--danger-color);
-}
-
-.btn-danger:hover {
-  background-color: darken(var(--danger-color), 10%);
-  border-color: darken(var(--danger-color), 10%);
 }
 
 .list-group-item {
@@ -57,7 +54,7 @@ h1 {
   margin-top: 20px;
 }
 
-h2 {
+.title {
   margin-top: 60px;
   margin-bottom: 30px;
   color: var(--primary-color);
@@ -70,6 +67,8 @@ table {
 }
 
 .form-group {
+  display: flex;
+  flex-direction: column;
   width: 300px;
   margin-right: auto;
   margin-left: auto;
@@ -79,11 +78,17 @@ table {
 }
 
 .form-group label {
+  text-align: left;
   float: left;
 }
 
 .form-control {
   border-color: var(--primary-color);
+}
+
+.space-container {
+  display: flex;
+  flex-direction: row;
 }
 
 .edit-input {
@@ -121,7 +126,6 @@ table {
 .container {
   max-width: 100%;
   margin: 0 auto;
-  padding: 20px;
 }
 
 .grid-container {
@@ -336,7 +340,23 @@ table {
   /* Styles for the reservation list container */
 }
 
+textarea {
+  width: 100%;
+  border: 1px solid #17a2b8;
+  height: max-content;
+  border-radius: 6px;
+}
 
+input {
+  width: 100%;
+  border: 1px solid #17a2b8;
+  height: max-content;
+  border-radius: 6px;
+}
+
+.time-selector {
+  margin: 6px;
+}
 
 /* Footer.css */
 footer {
@@ -368,4 +388,9 @@ footer a:hover {
 .container-fluid {
   padding-right: 0;
   padding-left: 0;
+}
+
+button {
+  margin-right: 6px;
+  margin-left: 6px;
 }

@@ -19,7 +19,7 @@ function EditReservationForm({ reservationSpaceId }) {
         setSpaceId(response2.data.spaceId);
         setStartDate(formatDate(response2.data.startDate));
         setStartTime(formatTime(response2.data.startDate));
-        console.log(startTime);
+        setEndTime(formatDuration(response2.data.startDate,response2.data.endDate))
       } catch (error) {
         console.error('Error fetching spaces:', error);
       }
@@ -52,23 +52,29 @@ function EditReservationForm({ reservationSpaceId }) {
     return `${year}-${month}-${day}`;
   };
 
-  const formatDate = (isoDateTimeString) => {
-    const date = new Date(isoDateTimeString);
+  const formatDate = (dateTimeString) => {
+    const date = new Date(dateTimeString);
     const day = date.getDate().toString().padStart(2, '0');
     const month = (date.getMonth() + 1).toString().padStart(2, '0');
     const year = date.getFullYear().toString();
     return `${year}-${month}-${day}`;
   };
 
-  const formatTime = (isoDateTimeString) => {
-    const date = new Date(isoDateTimeString);
+  const formatTime = (dateTimeString) => {
+    const date = new Date(dateTimeString);
     const hours = date.getHours().toString().padStart(2, '0');
     const minutes = date.getMinutes().toString().padStart(2, '0');
     console.log(`${hours}:${minutes}`);
     return `${hours}:${minutes}`;
   };
 
-  const formatDuration = () => {}
+  const formatDuration = (dateTime1,dateTime2) => {
+    const date1 = new Date(dateTime1);
+    const date2 = new Date(dateTime2);
+    const differenceInMilliseconds = Math.abs(date2 - date1);
+    const differenceInHours = differenceInMilliseconds / (1000 * 60 * 60);
+    return differenceInHours;
+  }
 
   const cancelReservation = async (e) => {
     e.preventDefault();
