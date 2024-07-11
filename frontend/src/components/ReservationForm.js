@@ -31,7 +31,10 @@ function ReservationForm() {
       window.location.reload();
     } catch (error) {
       console.error('Erro ao criar reserva', error);
-      alert('Erro ao criar reserva');
+      if (error.response.data.error.includes('Conflicting reservation exists')) {
+        alert('Erro: já existe uma reserva neste horário para o espaço selecionado. Verifique a disponibilidade no calendário.');
+      } else { alert('Erro ao criar reserva'); }
+
     }
   };
 
@@ -64,7 +67,7 @@ function ReservationForm() {
                 <option disabled>Loading spaces...</option>
               )}
             </select>
-            <Modal/>
+            <Modal />
           </div>
           <label>Data e Hora de Início:</label>
           <div className='datetime-container'>
