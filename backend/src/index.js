@@ -5,13 +5,8 @@ const sequelize = require('./config/database');
 const spaceRoutes = require('./routes/spaceRoutes');
 const clientRoutes = require('./routes/clientRoutes');
 const reservationRoutes = require('./routes/reservationRoutes');
-const swaggerJsDoc = require("swagger-jsdoc");
-const swaggerUi = require("swagger-ui-express");
-const swaggerDocs = require("./swagger.json");
 
 const app = express();
-
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 
 app.use(cors()); // Add the cors middleware
 app.use(bodyParser.json());
