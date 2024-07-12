@@ -12,6 +12,7 @@ function EditSpaceForm({ spaceId, name, capacity, description }) {
         setEditedName(name);
         setCapacity(capacity);
         setDescription(description);
+        console.log(spaceId, name, capacity, description);
     }, [spaceId, name, capacity, description]); // dependencies to ensure useEffect runs when these props change
 
     const handleUpdate = async () => {
