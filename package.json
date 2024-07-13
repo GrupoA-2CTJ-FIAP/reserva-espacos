@@ -1,5 +1,17 @@
 {
+  "name": "reserva-espacos",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "postinstall": "npm install --prefix backend && npm install --prefix frontend",
+    "start": "concurrently \"npm run start:backend\" \"npm run start:frontend\"",
+    "start:backend": "npm start --prefix backend",
+    "start:frontend": "npm start --prefix frontend"
+  },
   "dependencies": {
     "axios": "^1.7.2"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
   }
 }

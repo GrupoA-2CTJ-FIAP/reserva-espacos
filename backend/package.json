@@ -17,6 +17,7 @@
     "express": "^4.19.2",
     "pg": "^8.12.0",
     "pg-hstore": "^2.3.4",
+    "project-root": "file:",
     "sequelize": "^6.37.3"
   }
 }
