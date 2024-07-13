@@ -13,7 +13,6 @@ function ReservationCalendar() {
     async function fetchReservations() {
       try {
         const response = await axios.get('/reservations');
-        console.log('Fetched reservations:', response.data); // Debug
         setReservations(response.data);
         setLoading(false);
       } catch (error) {
@@ -64,7 +63,7 @@ function ReservationCalendar() {
 
   return (
     <div className="container">
-      <h2>Calendário</h2>
+      <h2 className='title'>Calendário</h2>
       <div className="grid-container">
         <div className="calendar-container">
           <Calendar
@@ -115,7 +114,7 @@ function ReservationCalendar() {
                 <tbody>
                   {filteredReservations.map(reservation => (
                     <tr key={reservation.id}>
-                      <td>{reservation.spaceId || 'N/A'}</td>
+                      <td>{reservation.spaceName || 'N/A'}</td>
                       <td>{formatHour(reservation.startDate) || 'N/A'}</td>
                       <td>{formatHour(reservation.endDate) || 'N/A'}</td>
                     </tr>

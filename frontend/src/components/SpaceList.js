@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { Accordion } from 'react-bootstrap';
 import axios from '../api';
+import EditSpaceForm from './EditSpaceForm';
 
 function SpaceList() {
   const [spaces, setSpaces] = useState([]);
@@ -13,15 +15,17 @@ function SpaceList() {
   }, []);
 
   return (
-    <div className="container mt-5">
-      <h2>Lista de Espaços</h2>
-      <div className="list-group">
+    <div className="container">
+      <Accordion>
         {spaces.map((space) => (
-          <button key={space.id} className="list-group-item list-group-item-action">
-            {space.name} - Capacidade: {space.capacity}
-          </button>
+          <Accordion.Item eventKey={space.id} key={space.id}>
+            <Accordion.Header>{space.name}</Accordion.Header>
+            <Accordion.Body>
+              <EditSpaceForm spaceId={space.id} name={space.name} capacity={space.capacity} description={space.description}/>
+            </Accordion.Body>
+          </Accordion.Item>
         ))}
-      </div>
+      </Accordion>
     </div>
   );
 }

@@ -10,7 +10,7 @@ const App = () => {
   return (
     <div className="App">
       <Navbar/>
-      <h2>Fazer Reserva</h2>
+      <h2 className='title'>Fazer Reserva</h2>
       <ReservationForm /> 
       <ReservationCalendar />
       <ReservationList />

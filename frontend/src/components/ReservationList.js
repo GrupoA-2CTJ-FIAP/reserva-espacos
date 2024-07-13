@@ -11,7 +11,6 @@ function ReservationList() {
     async function fetchReservations() {
       try {
         const response = await axios.get('/reservations');
-        console.log('Fetched reservations:', response.data); // Debug
         setReservations(response.data);
         setLoading(false);
       } catch (error) {
@@ -38,12 +37,12 @@ function ReservationList() {
     const year = date.getFullYear().toString();
     const hours = date.getHours().toString().padStart(2, '0');
     const minutes = date.getMinutes().toString().padStart(2, '0');
-    return `${day}-${month}-${year} ${hours}:${minutes}`;
+    return `${day}/${month}/${year} ${hours}:${minutes}`;
   }
 
   return (
     <div className="reservation-list">
-      <h2>Todas as Reservas</h2>
+      <h2 className='title'>Todas as Reservas</h2>
       <table className="table">
         <thead>
           <tr>
@@ -55,10 +54,10 @@ function ReservationList() {
         <tbody>
           {reservations.map((reservation) => (
             <tr key={reservation.id}>
-              <td>{reservation.spaceId || 'N/A'}</td>
+              <td>{reservation.spaceName || 'N/A'}</td>
               <td>{formatDate(reservation.startDate) || 'N/A'}</td>
               <td>{formatDate(reservation.endDate) || 'N/A'}</td>
-              <SidePanel spaceId={reservation.id}/>
+              <td><SidePanel spaceId={reservation.id}/></td>
             </tr>
           ))}
         </tbody>

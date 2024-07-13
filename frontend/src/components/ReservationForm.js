@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import axios from '../api';
+import Modal from '../components/Modal'
 
-function ReservationForm({ requestType = "POST" }) {
+function ReservationForm() {
   const [spaces, setSpaces] = useState([]);
   const [spaceId, setSpaceId] = useState('');
   const [startDate, setStartDate] = useState('');
-  const [startTime, setStartTime] = useState('');
+  const [startTime, setStartTime] = useState('00:00');
   const [endTime, setEndTime] = useState('1');
 
   useEffect(() => {
     async function fetchSpaces() {
       try {
         const response = await axios.get('/spaces');
-        console.log('Fetched spaces:', response.data); // Debugging log
         setSpaces(response.data);
       } catch (error) {
         console.error('Error fetching spaces:', error);
@@ -24,18 +24,17 @@ function ReservationForm({ requestType = "POST" }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      if (requestType === 'POST') {
-        const startDateTime = new Date(startDate + 'T' + startTime).toISOString();
-        const endDateTime = new Date(new Date(startDateTime).getTime() + endTime * 60 * 60 * 1000).toISOString();
-        await axios.post('/reservations', { "spaceId": spaceId, "clientId": 1, "startDate": startDateTime, "endDate": endDateTime });
-        alert('Reserva criada com sucesso!');
-        window.location.reload();
-      } else if (requestType === 'PUT') {
-
-      }
+      const startDateTime = new Date(startDate + 'T' + startTime).toISOString();
+      const endDateTime = new Date(new Date(startDateTime).getTime() + endTime * 60 * 60 * 1000).toISOString();
+      await axios.post('/reservations', { "spaceId": spaceId, "clientId": 1, "startDate": startDateTime, "endDate": endDateTime });
+      alert('Reserva criada com sucesso!');
+      window.location.reload();
     } catch (error) {
       console.error('Erro ao criar reserva', error);
-      alert('Erro ao criar reserva');
+      if (error.response.data.error.includes('Conflicting reservation exists')) {
+        alert('Erro: já existe uma reserva neste horário para o espaço selecionado. Verifique a disponibilidade no calendário.');
+      } else { alert('Erro ao criar reserva'); }
+
     }
   };
 
@@ -68,6 +67,7 @@ function ReservationForm({ requestType = "POST" }) {
                 <option disabled>Loading spaces...</option>
               )}
             </select>
+            <Modal />
           </div>
           <label>Data e Hora de Início:</label>
           <div className='datetime-container'>
@@ -79,7 +79,7 @@ function ReservationForm({ requestType = "POST" }) {
               min={getTodayDate()} // Set min attribute to today's date
               required
             />
-            <select defaultValue="00:00" onChange={(e) => setStartTime(e.target.value)}
+            <select className='time-selector' defaultValue="00:00" onChange={(e) => setStartTime(e.target.value)}
               required>
               <option value="00:00">00:00</option>
               <option value="01:00">01:00</option>
