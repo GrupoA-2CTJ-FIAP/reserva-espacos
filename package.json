@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "npm run prestart && npx concurrently \"npm run start:backend\" \"npm run start:frontend\"",
-    "prestart": "npm install && npm install --prefix backend && npm install --prefix frontend",
+    "postinstall": "npm install --prefix backend && npm install --prefix frontend",
+    "start": "concurrently \"npm run start:backend\" \"npm run start:frontend\"",
     "start:backend": "npm start --prefix backend",
     "start:frontend": "npm start --prefix frontend"
   },
